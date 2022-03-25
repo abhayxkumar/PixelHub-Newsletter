@@ -34,6 +34,7 @@ app.post("/", function(req, res){
         ]
     };
 
+
     const jsonData = JSON.stringify(data);
 
     const url = "https://us18.api.mailchimp.com/3.0/lists/"+process.env.LIST_ID;
@@ -44,6 +45,9 @@ app.post("/", function(req, res){
     }
 
     const request = https.request(url, options, function(response) {
+
+        response.statusCode === 200 ? res.sendFile(__dirname + "/success.html") : res.sendFile(__dirname + "/failure.html");
+
         response.on("data", function(data){
             console.log(JSON.parse(data));
         })
@@ -52,6 +56,10 @@ app.post("/", function(req, res){
     request.write(jsonData);
     request.end();
 
+});
+
+app.post("/failure", function(req, res){
+    res.redirect("/");
 });
 
 
