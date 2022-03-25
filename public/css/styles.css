@@ -57,3 +57,9 @@ body {
     color: black;
     border: rgb(248, 248, 74);
   }
+
+a, 
+a:hover {
+  color: grey;
+  text-decoration: none;
+}
